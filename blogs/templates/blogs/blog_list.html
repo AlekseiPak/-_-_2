@@ -6,6 +6,9 @@
 	<title>Document</title>
 </head>
 <body>
-	{{blog.text}}
+	{% for blogs in blog %}
+	<h1>{{blogs.title}}</h1>
+	<p>{{blogs.text}}</p>
+	{% endfor %}	
 </body>
 </html>

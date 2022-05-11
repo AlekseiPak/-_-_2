@@ -1,0 +1,15 @@
+{% extends "blogs/_base.html"%}     
+{% block content %}
+{% load static %}
+<title>Document</title>
+	{% for b in books %}
+	<div class="book">
+		<!-- <span>{{b.description}}</span> -->
+		<img src="{{b.cover.url}}">
+		<h1>{{b.title}}</h1>
+		<h3>{{b.price}} $</h3>
+		<span class="date">{{b.release_date}}</span>
+	</div>
+	{% endfor %}
+
+{% endblock content %}
