@@ -1,0 +1,114 @@
+{% extends "_base.html"%}     
+{% block content %}
+	<div class="row mt-4">
+		<h3 class="text-center">Cписок учеников</h3>
+		<!-- для того что бы работал поиск нужно добавить в конце  action=""-->
+		<form class="row row-cols-lg-auto g-3 align-items-center" action="">
+			<div class="col-md-6 col-12">
+			 	 <label class="visually-hidden" for="inlineFormInputGroupUsername">Имя</label>
+				  <!-- Чтобы добавить поиск нужно добавить после  placeholder="Имя ученика" 
+					name="q" value="{{search_query}}" required minlength=3> -->
+				<input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Имя ученика"
+				name="q" value="{{search_query}}">
+				<!-- required minlength=3 -->
+				
+			</div>
+			<!-- Добавить доп. строку поиска -->
+			<div class="col-md-2 col-12">
+				<label class="visually-hidden" for="gradeInput">класс:</label>
+				<input class="form-control" type="number" name="grade" min="1" max="11" id="gradeInput">
+			</div>
+		  	<div class="col-md-2 col-12">
+			  	<button type="submit" class="btn btn-primary">Поиск</button>
+			</div>
+			<div class="col-12">Показать всех
+				<a href="{% url 'student_create' %}">Добавить</a>
+			</div>
+		</form>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">имя</th>
+					<th scope="col">Фамилия</th>
+					<th scope="col">школа</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for s in students%}
+					<tr>
+						<th scope="row">{{s.id}}</th>
+						<td>
+							<a href="{% url 'student_detail' s.id %}">{{s.name}}</a>
+						</td>
+						<td>{{s.surname}}</td>
+						<td>{{s.school}}</td>
+						<td>
+							<a href="{% url 'student_update' s.id %}">
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" 
+								fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
+								<path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 
+								5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 
+								2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 
+								.5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 
+								7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5
+								 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5
+								  0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"/>
+							  	</svg>
+
+							</a>
+							<a href="{% url 'student_delete' s.id %}">
+								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" 
+								fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+								<path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 
+								1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 
+								1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 
+								0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5
+								.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+								</svg>
+							</a>
+						</td>
+					</tr>
+					<!--для того что бы показать что пользователя не существует! -->
+				{% empty %}
+					<tr>
+						<td colspan="4" class="text-center">Поиск не дал результатов</td>
+					</tr>	
+				{% endfor %}
+			</tbody>
+		</table>
+		<div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;">
+			<a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+			  <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+			  <span class="fs-4">Список учителей</span>
+			</a>
+			<hr>
+			<ul class="nav nav-pills flex-column mb-auto">
+			  {% for t in teachers %}
+			  <li class="nav-item">
+				<a href="{% url 'teachers_students' t.id %}">{{t.name}}</a>
+			  </li>
+			{% endfor %}
+
+			</ul>
+			<hr>
+			<div class="dropdown">
+			  <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+				<img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+				<strong>mdo</strong>
+			  </a>
+			  <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
+				<li><a class="dropdown-item" href="#">New project...</a></li>
+				<li><a class="dropdown-item" href="#">Settings</a></li>
+				<li><a class="dropdown-item" href="#">Profile</a></li>
+				<li><hr class="dropdown-divider"></li>
+				<li><a class="dropdown-item" href="#">Sign out</a></li>
+			  </ul>
+			</div>
+		  </div>
+	</div>
+
+
+
+
+{% endblock content %}

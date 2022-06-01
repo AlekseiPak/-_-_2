@@ -1,0 +1,18 @@
+{% extends "_base.html"%}     
+{% block content %}
+{% load static %}
+<div class="row mt-4">
+    <img id="cover_img" src="{{book.cover.url}}">
+    <div class="col-4">
+        <h1>{{book.title}}</h1>
+        <p>{{book.description}}</p>
+        <p>Release date: {{book.release_date}}</p>
+        <p>Price: {{book.price}} $.</p>
+        <a href=""class="btn btn-primary">Заказать</a>
+    </div>
+        
+</div>
+
+    
+
+{% endblock content %}

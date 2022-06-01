@@ -1,0 +1,21 @@
+{% extends '_base.html'%}
+{% load widget_tweaks %}
+{% block content %}
+<div class="col-md-5">
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label>Введите имя:</label>
+            {% render_field form.name class="form-control"%}
+        <label >Введите фамилию:</label>
+            {% render_field form.surname class="form-control"%}
+        <label >Введите фамилию:</label>
+        {% render_field form.birth_date class="form-control"%}
+        <button
+            type="submit"
+            class="btn btn-success">Добавить
+        </button>
+
+    </form>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,56 @@
+{% extends "_base.html"%}     
+{% block content %}
+	<div class="row mt-4">
+		<h3 class="text-center">список учителей</h3>
+		<!-- для того что бы работал поиск нужно добавить в конце  action=""-->
+		<form class="row row-cols-lg-auto g-3 align-items-center" action="">
+			<div class="col-md-6 col-12">
+			 	 <label class="visually-hidden" for="inlineFormInputGroupUsername">Имя</label>
+				  <!-- Чтобы добавить поиск нужно добавить после  placeholder="Имя ученика" 
+					name="q" value="{{search_query}}" required minlength=3> -->
+				<input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Имя учителя"
+				name="q" value="{{search_query}}">
+				<!-- required minlength=3 -->
+				
+			</div>
+			<!-- Добавить доп. строку поиска -->
+		  	<div class="col-md-2 col-12">
+			  	<button type="submit" class="btn btn-primary">Поиск</button>
+			</div>
+			<div class="col-12">Показать всех
+				<a href="{% url 'teacher_create' %}">Добавить</a>
+			</div>
+		</form>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">имя</th>
+					<th scope="col">Фамилия</th>
+					<th scope="col">школа</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for t in teachers %}
+					<tr>
+						<th scope="row">{{t.id}}</th>
+						<td>
+							<a href="{% url 'teacher_detail' t.id %}">{{t.name}}</a>
+						</td>
+						<td>{{t.surname}}</td>
+						<td>{{t.school}}</td>
+					</tr>
+					<!--для того что бы показать что пользователя не существует! -->
+				{% empty %}
+					<tr>
+						<td colspan="4" class="text-center">Поиск не дал результатов</td>
+					</tr>	
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+
+
+
+
+{% endblock content %}

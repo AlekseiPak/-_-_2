@@ -1,0 +1,112 @@
+{% extends '_base.html'%}
+{% load widget_tweaks %}
+
+
+{% block content %}
+<h1>Создание профиля ученика</h1>
+<div class="col-md-5">
+    <form action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="id_name">Введите имя:</label>
+        {% render_field form.name class="form-control" placeholder="Имя"%}
+        {% if form.name.errors%}
+            <div class="alert alert-danger mt-3"  role="alert">
+            
+                <ul >
+                    <li>
+                        {{form.name.errors|striptags}}
+                    </li>
+                </ul>
+            </div>
+        {% endif %}
+        <label for="id_surname">Введите фамилию:</label>
+        {% render_field form.surname class="form-control" placeholder="Фамилия"%}
+        {% if form.surname.errors%}
+        <div class="alert alert-danger mt-3" role="alert">
+        
+            <ul>
+                <li>
+                    {{form.surname.errors|striptags}}
+                </li>
+            </ul>
+        </div>
+    {% endif %}
+        <label for="id_birth_date">Дата рождения:</label>
+         {% render_field form.birth_date class="form-control" type="date" %}
+         {% if form.birth_date.errors%}
+         <div class="alert alert-danger mt-3" role="alert">
+         
+             <ul>
+                 <li>
+                     {{form.birth_date.errors|striptags}}
+                 </li>
+             </ul>
+         </div>
+     {% endif %}
+         <label for="id_school">школа:</label>
+        {% render_field form.school class="form-control" placeholder="Школа"%}
+        {% if form.school.errors%}
+        <div class="alert alert-danger mt-3" role="alert">
+        
+            <ul>
+                <li>
+                    {{form.school.errors|striptags}}
+                </li>
+            </ul>
+        </div>
+    {% endif %}
+        <label for="id_grade">класс:</label>
+        {% render_field form.grade class="form-control" placeholder="Класс"%}
+        {% if form.grade.errors%}
+        <div class="alert alert-danger mt-3" role="alert">
+        
+            <ul>
+                <li>
+                    {{form.grade.errors|striptags}}
+                </li>
+            </ul>
+        </div>
+    {% endif %}
+        <label for="id_average_mark">средняя оценка:</label>
+         {% render_field form.average_mark class="form-control" placeholder="Оценка"%}
+         {% if form.average_mark.errors%}
+         <div class="alert alert-danger mt-3" role="alert">
+         
+             <ul>
+                 <li>
+                     {{form.average_mark.errors|striptags}}
+                 </li>
+             </ul>
+         </div>
+     {% endif %}
+         <label for="id_photo">Фото:</label>
+         {% render_field form.photo class="form-control" placeholder=" Добавить фото"%} 
+         {% if form.photo.errors%}
+         <div class="alert alert-danger mt-3" role="alert">
+         
+             <ul>
+                 <li>
+                     {{form.photo.errors|striptags}}
+                 </li>
+             </ul>
+         </div>
+     {% endif %}
+        <label for="id_teacher">учитель:</label>
+        {% render_field form.teacher class="form-control"%}
+        {% if form.teacher.errors%}
+        <div class="alert alert-danger mt-3" role="alert">
+        
+            <ul>
+                <li>
+                    {{form.teacher.errors|striptags}}
+                </li>
+            </ul>
+        </div>
+    {% endif %}
+        <button
+            type="submit"
+            class="btn btn-success mt-3" >добавить
+        </button>
+    </form>
+</div>
+{% endblock content %}

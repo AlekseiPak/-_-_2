@@ -1,0 +1,15 @@
+{% extends "_base.html"%}     
+
+{% block title %}Удаление{%endblock title %}
+
+{% block content %}
+    <h3>Вы действительно хотите удалить ученика </h3> 
+    <h1>"{{student.name}}"</h1> 
+    <form action="" method="POST" encytype="multipart/form-data">
+        {% csrf_token%} {{form.as_p}}
+        <button type="submit" class="btn btn-primary">Удалить</button>
+        <a class="btn btn-warning" href="{% url 'student_list' %}">Отменить</a>
+    </form>
+    
+
+{% endblock content %}

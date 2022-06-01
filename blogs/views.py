@@ -25,4 +25,3 @@ def book_detail(request, book_id):
 
 	return render(request, 'blogs/book_detail.html', context)
 
-

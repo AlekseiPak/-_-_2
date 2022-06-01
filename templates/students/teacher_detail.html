@@ -1,0 +1,24 @@
+{% extends "_base.html"%}     
+{% block content %}
+{% load static %}
+<div class="row mt-4">
+    <img id="cover_img" src="{{teacher.photo.url}}">
+    <div class="col-4">
+        <h3>ФИО: {{teacher.surname}} {{teacher.name}}</h3>
+        <p>Дата рождения: {{teacher.birth_date}}</p>
+        <p>Номер школы: {{teacher.school}}</p>
+        <p>Предмет: {{teacher.subject}}</p>
+        <h4>Список студентов</h4>
+        {% for student in students %}
+           <a href="{% url 'student_detail' student.id %}"><h5>{{student.name}}</h5></a> 
+        {% endfor %}
+    </div>
+        
+</div>
+
+
+
+
+
+
+{% endblock content %}

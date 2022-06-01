@@ -1,0 +1,22 @@
+{% extends "_base.html"%}     
+{% block content %}
+{% load static %}
+<title>Books</title>
+	<h1>Все книги</h1>
+	<div class="row row-cols-6 row-cols-md-4 g-4">
+		{% for b in books %}
+			<div class=" col col-6">
+					<div id="card" class="card">
+						<img id="cover" class="card-img-top" src="{{b.cover.url}}" alt="Изображение не доступно">
+						<div class="card-body">
+							<h5 class="card-title">{{b.title}}</h5>
+							<p class="card-text">{{b.description}}</p>
+							<a href="{% url 'book_detail' b.id %}" class="btn btn-primary">Купить</a>
+						</div>
+					</div>
+			</div>
+		{% endfor %}
+	</div>
+	
+
+{% endblock content %}
